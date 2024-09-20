@@ -7,6 +7,7 @@ import com.example.testmegalab.mapper.UserMapper;
 import com.example.testmegalab.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,16 +22,16 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public UserDtoResponse getUserById(@RequestHeader Long id) {
+    public UserDtoResponse getUserById(@PathVariable Long id) {
        return userMapper.entityToDto(userService.getUserById(id));
     }
     @GetMapping(value = "/user/{id}")
-    public User getUser(@RequestHeader Long id) {
+    public User getUser(@PathVariable  Long id) {
         return userService.getUserById(id);
     }
 
     @PutMapping(value = "/update/{id}")
-    public void updateUser(@RequestBody UserDtoRequest userDtoRequest, @RequestHeader Long id){
+    public void updateUser(@PathVariable  UserDtoRequest userDtoRequest, @RequestHeader Long id){
         userService.updateUser(userDtoRequest,id);
     }
 
